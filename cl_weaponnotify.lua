@@ -44,6 +44,8 @@ end
 
 function GetWeaponHashes()
     return {
+        -- to add more weapons do this
+        -- weapon_example = true,
         WEAPON_PISTOL = true,
         WEAPON_COMBATPISTOL = true,
         WEAPON_APPISTOL = true,
@@ -63,7 +65,6 @@ function GetWeaponHashes()
         WEAPON_BULLPUPSHOTGUN = true,
         WEAPON_KNIFE = true,
         WEAPON_BAT = true,
-        WEAPON_G20GF = true,
         WEAPON_CROWBAR = true,
         WEAPON_GOLFCLUB = true,
         WEAPON_HAMMER = true,
