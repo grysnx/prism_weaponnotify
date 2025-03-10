@@ -3,16 +3,16 @@ local currentWeapon = nil
 
 CreateThread(function()
     while true do
-        Wait(500) -- checks every half an second
+        Wait(500) -- checks every half second
 
         local playerPed = PlayerPedId()
         local weaponHash = GetSelectedPedWeapon(playerPed)
 
-        if weaponHash ~= currentWeapon and weaponHash ~= `WEAPON_UNARMED` then
+        if weaponHash ~= currentWeapon and weaponHash ~= `WEAPON_UNARMED` and IsWeaponAllowed(weaponHash) then
             local weaponName = GetLabelText(GetWeaponDisplayName(weaponHash)) or 'Unknown Weapon'
 
-            if exports.ox_lib then
-                exports.ox_lib:notify({
+            if lib then
+                lib:notify({
                     title = 'Weapon Holstered',
                     icon = 'gun',
                     description = 'You pulled out a ' .. weaponName,
@@ -34,7 +34,8 @@ function GetWeaponDisplayName(hash)
 end
 
 function WeaponHashToString(hash)
-    for weapon, _ in pairs(GetWeaponHashes()) do
+    local weaponHashes = GetWeaponHashes()
+    for weapon, _ in pairs(weaponHashes) do
         if GetHashKey(weapon) == hash then
             return weapon
         end
@@ -42,10 +43,18 @@ function WeaponHashToString(hash)
     return "WEAPON_UNKNOWN"
 end
 
+function IsWeaponAllowed(hash)
+    local weaponHashes = GetWeaponHashes()
+    for weapon, _ in pairs(weaponHashes) do
+        if GetHashKey(weapon) == hash then
+            return true
+        end
+    end
+    return false
+end
+
 function GetWeaponHashes()
     return {
-        -- to add more weapons do this
-        -- weapon_example = true,
         WEAPON_PISTOL = true,
         WEAPON_COMBATPISTOL = true,
         WEAPON_APPISTOL = true,
@@ -65,6 +74,7 @@ function GetWeaponHashes()
         WEAPON_BULLPUPSHOTGUN = true,
         WEAPON_KNIFE = true,
         WEAPON_BAT = true,
+        WEAPON_G20GF = true,
         WEAPON_CROWBAR = true,
         WEAPON_GOLFCLUB = true,
         WEAPON_HAMMER = true,
