@@ -23,7 +23,18 @@ CreateThread(function()
             end
 
             currentWeapon = weaponHash
-        elseif weaponHash == `WEAPON_UNARMED` then
+        elseif weaponHash == `WEAPON_UNARMED` and currentWeapon ~= nil then
+            if lib then
+                lib:notify({
+                    title = 'Weapon Unholstered',
+                    icon = 'gun',
+                    description = 'You put away your weapon.',
+                    type = 'info'
+                })
+            else
+                print("^1[ERROR] ox_lib is not found! Ensure it's running.^0")
+            end
+
             currentWeapon = nil
         end
     end
@@ -74,7 +85,6 @@ function GetWeaponHashes()
         WEAPON_BULLPUPSHOTGUN = true,
         WEAPON_KNIFE = true,
         WEAPON_BAT = true,
-        WEAPON_G20GF = true,
         WEAPON_CROWBAR = true,
         WEAPON_GOLFCLUB = true,
         WEAPON_HAMMER = true,
