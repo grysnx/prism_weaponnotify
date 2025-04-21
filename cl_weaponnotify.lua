@@ -12,7 +12,7 @@ CreateThread(function()
             local weaponName = GetLabelText(GetWeaponDisplayName(weaponHash)) or 'Unknown Weapon'
 
             if lib then
-                lib:notify({
+                lib.notify({
                     title = 'Weapon Holstered',
                     icon = 'gun',
                     description = 'You pulled out a ' .. weaponName,
@@ -25,7 +25,7 @@ CreateThread(function()
             currentWeapon = weaponHash
         elseif weaponHash == `WEAPON_UNARMED` and currentWeapon ~= nil then
             if lib then
-                lib:notify({
+                lib.notify({
                     title = 'Weapon Unholstered',
                     icon = 'gun',
                     description = 'You put away your weapon.',
